@@ -67,3 +67,15 @@ With everything learned in classes 25, 27 and 28 you will be able to build the A
 
 The simplest remains for last. With the knowledge acquired in class 43, you can very easily add a login with Spring Security to your project.
 Class 48 delivery. You will have time throughout the day to deliver until 11:59 p.m.
+
+
+### How to Run!
+
+Once you clone the repository you can check the endpoints on this website:
+
+```
+  localhost:8080/swagger-ui/index.html
+  
+```
+
+Thanks for sharing!
