@@ -16,17 +16,17 @@ For further reference, please consider the following sections:
 The following guides illustrate how to use some features concretely:
 
 * [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
+* [Building a REST Web Service](https://spring.io/guides/gs/rest-service/)
 * [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
 * [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
 
 ### Shift Reservation System
 
 It is desired to implement a system that allows managing the reservation of shifts for a dental clinic. This must meet the following requirements:
-Dentist data management: list, add, modify and delete dentists. Register last name, first name and license plate of the same.
-Patient data management: list, add, modify and delete patients. For each one, the following are stored: name, surname, address, ID and registration date.
-Register shift: it must be possible to allow a patient to be assigned a shift with a dentist at a certain date and time.
-Login: validate the entry to the system by means of a login with username and password. Any logged in user (ROLE_USER) should be allowed to register an appointment, but only those with an administration role (ROLE_ADMIN) to be able to manage dentists and patients. A user may have a single role and they will be entered directly into the database.
+* <strong>Dentist data management: </strong>list, add, modify and delete dentists. Register last name, first name and license plate of the same.
+* <strong>Patient data management: </strong>list, add, modify and delete patients. For each one, the following are stored: name, surname, address, ID and registration date.
+* <strong>Register shift: </strong>it must be possible to allow a patient to be assigned a shift with a dentist at a certain date and time.
+* <strong>Login: </strong>validate the entry to the system by means of a login with username and password. Any logged-in user (ROLE_USER) should be allowed to register an appointment, but only those with an administration role (ROLE_ADMIN) to be able to manage dentists and patients. A user may have a single role, and they will be entered directly into the database.
 
 
 ### Technical Requirements
@@ -47,7 +47,7 @@ The work will have a single final delivery, but to help you organize, we suggest
 
 ### Sprint 0 (Start)
 
-Once the course has started with the knowledge already acquired in Object Oriented Programming, Database I and Front End I, you will be able to start building your UML model of the classes you will need for the integrating project as well as everything related to the tables of the relational database that you will need to persist the data and the HTML screens with their styles to enter them. Do not worry that throughout the course you will learn to integrate all these parts!!!
+Once the course has started with the knowledge already acquired in Object-Oriented Programming, Database I and Front End I, you will be able to start building your UML model of the classes you will need for the integrating project as well as everything related to the tables of the relational database that you will need to persist the data and the HTML screens with their styles to enter them. Do not worry that throughout the course you will learn to integrate all these parts!!!
 
 ### Sprint 1 (Start of week 1 to End of week 2)
 
