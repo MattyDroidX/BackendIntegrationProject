@@ -1,6 +1,6 @@
 package com.integration.backendintegrationproject.dentist.controller;
 
-import com.integration.backendintegrationproject.dentist.entities.Dentist;
+import com.integration.backendintegrationproject.model.entities.Dentist;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

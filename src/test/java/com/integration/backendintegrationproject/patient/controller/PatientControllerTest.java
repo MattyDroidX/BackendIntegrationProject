@@ -1,6 +1,6 @@
 package com.integration.backendintegrationproject.patient.controller;
 
-import com.integration.backendintegrationproject.patient.entities.Patient;
+import com.integration.backendintegrationproject.model.entities.Patient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

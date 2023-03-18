@@ -1,6 +1,6 @@
-package com.integration.backendintegrationproject.dentist.repository;
+package com.integration.backendintegrationproject.repository;
 
-import com.integration.backendintegrationproject.dentist.entities.Dentist;
+import com.integration.backendintegrationproject.model.entities.Dentist;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
