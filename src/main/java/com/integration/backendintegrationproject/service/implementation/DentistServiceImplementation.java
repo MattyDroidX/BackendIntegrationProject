@@ -15,7 +15,6 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-
 public class DentistServiceImplementation implements DentistService {
 
     private final DentistRepository repository;

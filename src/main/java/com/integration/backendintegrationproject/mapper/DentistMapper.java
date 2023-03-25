@@ -4,8 +4,12 @@ import com.integration.backendintegrationproject.model.dto.Dentist.DentistPostDt
 import com.integration.backendintegrationproject.model.dto.Dentist.DentistUpdateDto;
 import com.integration.backendintegrationproject.model.entities.Dentist;
 import org.mapstruct.*;
+import org.mapstruct.factory.Mappers;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 
+@Component
 @Mapper( componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE )
 public interface DentistMapper {
     @Mapping( target = "id", source = "dentistId" )
