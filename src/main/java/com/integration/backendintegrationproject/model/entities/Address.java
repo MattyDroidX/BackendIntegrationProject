@@ -1,12 +1,14 @@
 package com.integration.backendintegrationproject.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column( name = "address_id" )
+    @Column(name = "address_id")
+    @JsonIgnore
     private Long addressId;
     private String street;
     private Integer number;
@@ -19,7 +21,8 @@ public class Address {
         this.zipCode = zipCode;
     }
 
-    public Address(){}
+    public Address() {
+    }
 
     public Long getAddressId() {
         return addressId;

@@ -4,18 +4,19 @@ import com.integration.backendintegrationproject.model.dto.Dentist.DentistPostDt
 import com.integration.backendintegrationproject.model.dto.Dentist.DentistUpdateDto;
 import com.integration.backendintegrationproject.model.entities.Dentist;
 import org.mapstruct.*;
-import org.mapstruct.factory.Mappers;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-
 @Component
-@Mapper( componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE )
+@Mapper( componentModel = "spring")
 public interface DentistMapper {
-    @Mapping( target = "id", source = "dentistId" )
     DentistDto dentistDto(Dentist dentist );
 
     Dentist dentistPostDto(DentistPostDto dentist );
+
+    DentistDto DentistPostDto(Dentist patient);
+
+
+
 
     @BeanMapping( nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE )
     void dentistNewUpdateDto(DentistUpdateDto dentistUpdateDto, @MappingTarget Dentist dentist );

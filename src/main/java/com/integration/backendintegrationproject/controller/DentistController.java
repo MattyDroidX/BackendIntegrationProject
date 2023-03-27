@@ -1,70 +1,47 @@
 package com.integration.backendintegrationproject.controller;
 
-import com.integration.backendintegrationproject.repository.DentistRepository;
-import com.integration.backendintegrationproject.model.entities.Dentist;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
+import com.integration.backendintegrationproject.exception.ResourceNotFoundException;
+import com.integration.backendintegrationproject.model.dto.Dentist.DentistDto;
+import com.integration.backendintegrationproject.model.dto.Dentist.DentistPostDto;
+import com.integration.backendintegrationproject.model.dto.Dentist.DentistUpdateDto;
+import com.integration.backendintegrationproject.service.DentistService;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/dentist")
-public class DentistController {
+public class DentistController{
 
-    private final DentistRepository dentistRepository;
-    private final Logger log = LoggerFactory.getLogger(DentistController.class);
+    private final DentistService service;
 
-    public DentistController(DentistRepository dentistRepository) {
-        this.dentistRepository = dentistRepository;
+    public DentistController(DentistService service) {
+        this.service = service;
     }
 
     @GetMapping
-    public List<Dentist> findAll(){
-        return dentistRepository.findAll();
+    public List<DentistDto> findAll(){
+        return service.findAll();
     }
-
-    @GetMapping("/{license}")
-    public ResponseEntity<Dentist>findByLicense(@PathVariable Long license){
-        Optional<Dentist> optDentist = dentistRepository.findById(license);
-        return optDentist.map(ResponseEntity::ok).orElseGet(()->ResponseEntity.notFound().build());
-    }
-
-    @PutMapping("/{license}")
-    public ResponseEntity<Dentist>modifyDentistData(@RequestBody Dentist dentist){
-        if(dentist.getLicense() == null){
-            log.warn("Dentist License does not exist!");
-            return ResponseEntity.badRequest().build();
-        }
-        if(!dentistRepository.existsById(dentist.getLicense())){
-            log.warn("Dentist does not exist!");
-            return ResponseEntity.notFound().build();
-        }
-        Dentist result = dentistRepository.save(dentist);
-        return ResponseEntity.ok(result);
-    }
-
     @PostMapping
-    public Dentist addDentist(@RequestBody Dentist dentist){
-        return dentistRepository.save(dentist);
+    public DentistDto createDentist(@Valid @RequestBody DentistPostDto dentistPostDto) {
+        return service.createDentist(dentistPostDto);
     }
 
-    @DeleteMapping("/{license}")
-    public ResponseEntity<Dentist> deleteDentist(@PathVariable Long license){
-        if(!dentistRepository.existsById(license)){
-            log.warn("Dentist does not exist");
-            return ResponseEntity.notFound().build();
-        }
-        dentistRepository.deleteById(license);
-        return ResponseEntity.noContent().build();
+    @PatchMapping("/{id}")
+    public DentistDto updateDentistInformation(@RequestBody DentistUpdateDto dentist, @PathVariable Long id) throws ResourceNotFoundException {
+        return service.updateDentistInformation(dentist,id);
     }
 
-    @DeleteMapping
-    public ResponseEntity<Dentist> deleteAll(){
-        log.info("Request made to delete all dentist information");
-        dentistRepository.deleteAll();
-        return ResponseEntity.noContent().build();
+    @ResponseStatus( HttpStatus.OK )
+    @DeleteMapping( "/{id}" )
+    public void deleteDentist(@PathVariable Long id) throws ResourceNotFoundException {
+        service.deleteDentist(id);
     }
 }

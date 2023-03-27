@@ -7,18 +7,23 @@ import com.integration.backendintegrationproject.model.dto.Dentist.DentistPostDt
 import com.integration.backendintegrationproject.model.dto.Dentist.DentistUpdateDto;
 import com.integration.backendintegrationproject.repository.DentistRepository;
 import com.integration.backendintegrationproject.service.DentistService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @Service
 public class DentistServiceImplementation implements DentistService {
 
     private final DentistRepository repository;
     private final DentistMapper mapper;
+
+    public DentistServiceImplementation(DentistRepository repository,DentistMapper mapper) {
+        this.repository = repository;
+        this.mapper = mapper;
+    }
+
     @Override
     public List<DentistDto> findAll() {
         var dentists = repository.findAll();
@@ -28,15 +33,15 @@ public class DentistServiceImplementation implements DentistService {
     }
 
     @Override
-    public DentistDto createDentist(DentistPostDto dentist) {
-        var saved = repository.save( mapper.dentistPostDto( dentist ));
-        return mapper.dentistDto( saved );
+    public DentistDto createDentist(DentistPostDto dentistPostDto) {
+        var saved = repository.save( mapper.dentistPostDto( dentistPostDto ));
+        return mapper.DentistPostDto( saved );
     }
 
     @Override
-    public DentistDto updateDentistInformation(DentistUpdateDto dentistUpdateDto, Long id) throws ResourceNotFoundException {
+    public DentistDto updateDentistInformation(DentistUpdateDto dentist, Long id) throws ResourceNotFoundException {
         var dentists = repository.findById( id ).orElseThrow( ResourceNotFoundException::new );
-        mapper.dentistNewUpdateDto( dentistUpdateDto, dentists );
+        mapper.dentistNewUpdateDto( dentist, dentists );
         return mapper.dentistDto(repository.save( dentists ) );
     }
 

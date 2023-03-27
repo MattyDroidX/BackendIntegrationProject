@@ -7,14 +7,17 @@ import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 public record PatientDto (
-   @NotBlank( message = "Name cannot be empty or null" )
    @JsonProperty
    String name,
-   @NotBlank( message = "Surname cannot be empty or null" )
    @JsonProperty
    String surname,
    @JsonProperty
    Address address,
    @JsonProperty
-   LocalDateTime registrationDate){}
+   String DNI,
+   @JsonProperty
+   LocalDateTime appointmentDate
+){}
+
+
 

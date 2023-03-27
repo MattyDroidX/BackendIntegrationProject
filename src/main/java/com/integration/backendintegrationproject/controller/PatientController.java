@@ -1,69 +1,46 @@
 package com.integration.backendintegrationproject.controller;
 
-import com.integration.backendintegrationproject.repository.PatientRepository;
-import com.integration.backendintegrationproject.model.entities.Patient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
+import com.integration.backendintegrationproject.exception.ResourceNotFoundException;
+import com.integration.backendintegrationproject.model.dto.Patient.PatientDto;
+import com.integration.backendintegrationproject.model.dto.Patient.PatientPostDto;
+import com.integration.backendintegrationproject.model.dto.Patient.PatientUpdateDto;
+import com.integration.backendintegrationproject.service.PatientService;
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
+@Slf4j
 @RestController
-public class PatientController {
+@RequestMapping("/api/patient")
+public class PatientController{
 
-    private final PatientRepository patientRepository;
-    private final Logger log = LoggerFactory.getLogger(PatientController.class);
+    private final PatientService service;
 
-    public PatientController(PatientRepository patientRepository) {
-        this.patientRepository = patientRepository;
+    public PatientController(PatientService service) {
+        this.service = service;
     }
 
-    @GetMapping("/api/patient")
-    public List<Patient> findAll(){
-        return patientRepository.findAll();
+    @GetMapping
+    public List<PatientDto> findAll() {
+        return service.findAll();
     }
 
-    @GetMapping("/api/patient/{id}")
-    public ResponseEntity<Patient> findById(@PathVariable Long id){
-        Optional<Patient> optPatient = patientRepository.findById(id);
-        return optPatient.map(ResponseEntity::ok).orElseGet(()->ResponseEntity.notFound().build());
+    @PostMapping
+    public PatientDto createPatient(@Valid @RequestBody PatientPostDto patientPostDto) {
+        return service.createPatient(patientPostDto);
     }
 
-    @PutMapping("/api/patient/{id}")
-    public ResponseEntity<Patient>modifyPatientData(@RequestBody Patient patient){
-        if(patient.getId() == null){
-            log.warn("Patient id does not exist!");
-            return ResponseEntity.badRequest().build();
-        }
-        if(!patientRepository.existsById(patient.getId())){
-            log.warn("Patient does not exist!");
-            return ResponseEntity.notFound().build();
-        }
-        Patient result = patientRepository.save(patient);
-        return ResponseEntity.ok(result);
+    @PatchMapping("/{id}")
+    public PatientDto updatePatientInformation(@RequestBody PatientUpdateDto patient,@PathVariable Long id) throws ResourceNotFoundException {
+        return service.updatePatientInformation(patient, id);
     }
 
-    @PostMapping("/api/patient")
-    public Patient addPatient(@RequestBody Patient patient){
-        return patientRepository.save(patient);
-    }
-
-    @DeleteMapping("/api/patient/{id}")
-    public ResponseEntity<Patient> deletePatient(@PathVariable Long id){
-        if(!patientRepository.existsById(id)){
-            log.warn("Patient does not exist");
-            return ResponseEntity.notFound().build();
-        }
-        patientRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @DeleteMapping("/api/patient")
-    public ResponseEntity<Patient> deleteAll(){
-        log.info("Request made to delete all patients information");
-        patientRepository.deleteAll();
-        return ResponseEntity.noContent().build();
+    @ResponseStatus( HttpStatus.OK )
+    @DeleteMapping("/{id}")
+    public void deletePatient(@PathVariable Long id) throws ResourceNotFoundException {
+        service.deletePatient(id);
     }
 }

@@ -15,7 +15,6 @@ public class Dentist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dentist_id")
     private Long id;
-    @Column(unique = true)
     private Long license;
     private String name;
     private String lastName;

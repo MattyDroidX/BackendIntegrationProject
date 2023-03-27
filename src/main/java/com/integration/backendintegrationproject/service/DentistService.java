@@ -12,7 +12,7 @@ public interface DentistService {
 
     List<DentistDto> findAll();
     DentistDto createDentist(DentistPostDto dentist);
-    DentistDto updateDentistInformation(DentistUpdateDto dentistUpdateDto, Long license)throws ResourceNotFoundException;
+    DentistDto updateDentistInformation(DentistUpdateDto dentist, Long id)throws ResourceNotFoundException;
     void deleteDentist(Long id) throws ResourceNotFoundException;
 
 }

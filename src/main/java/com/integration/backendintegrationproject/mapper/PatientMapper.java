@@ -4,12 +4,14 @@ import com.integration.backendintegrationproject.model.dto.Patient.PatientPostDt
 import com.integration.backendintegrationproject.model.dto.Patient.PatientUpdateDto;
 import com.integration.backendintegrationproject.model.entities.Patient;
 import org.mapstruct.*;
+import org.springframework.stereotype.Component;
 
-@Mapper( componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE )
+@Component
+@Mapper( componentModel = "spring")
 public interface PatientMapper {
-    @Mapping( target = "id", source = "patientId" )
     PatientDto patientDto(Patient patient );
 
+    PatientDto PatientPostDto(Patient patient);
     Patient patientPostDto(PatientPostDto patient );
 
     @BeanMapping( nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE )
