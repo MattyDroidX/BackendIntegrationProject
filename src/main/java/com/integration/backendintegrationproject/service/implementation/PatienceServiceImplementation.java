@@ -5,10 +5,8 @@ import com.integration.backendintegrationproject.mapper.PatientMapper;
 import com.integration.backendintegrationproject.model.dto.Patient.PatientDto;
 import com.integration.backendintegrationproject.model.dto.Patient.PatientPostDto;
 import com.integration.backendintegrationproject.model.dto.Patient.PatientUpdateDto;
-import com.integration.backendintegrationproject.model.entities.Patient;
 import com.integration.backendintegrationproject.repository.PatientRepository;
 import com.integration.backendintegrationproject.service.PatientService;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
