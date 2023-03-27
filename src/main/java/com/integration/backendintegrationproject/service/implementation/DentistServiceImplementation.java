@@ -5,6 +5,7 @@ import com.integration.backendintegrationproject.mapper.DentistMapper;
 import com.integration.backendintegrationproject.model.dto.Dentist.DentistDto;
 import com.integration.backendintegrationproject.model.dto.Dentist.DentistPostDto;
 import com.integration.backendintegrationproject.model.dto.Dentist.DentistUpdateDto;
+import com.integration.backendintegrationproject.model.entities.Dentist;
 import com.integration.backendintegrationproject.repository.DentistRepository;
 import com.integration.backendintegrationproject.service.DentistService;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -37,6 +38,18 @@ public class DentistServiceImplementation implements DentistService {
         var saved = repository.save( mapper.dentistPostDto( dentistPostDto ));
         return mapper.DentistPostDto( saved );
     }
+
+//    @Override
+//    public DentistDto createDentist(DentistPostDto dentistPostDto) {
+//        var saved = repository.save( new Dentist(
+//                dentistPostDto.license(),
+//                dentistPostDto.name(),
+//                dentistPostDto.lastName()));
+//        return new DentistDto(
+//                saved.getLicense(),
+//                saved.getName(),
+//                saved.getLastName());
+//    }
 
     @Override
     public DentistDto updateDentistInformation(DentistUpdateDto dentist, Long id) throws ResourceNotFoundException {
