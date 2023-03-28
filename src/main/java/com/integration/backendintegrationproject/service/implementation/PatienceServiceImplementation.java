@@ -5,8 +5,10 @@ import com.integration.backendintegrationproject.mapper.PatientMapper;
 import com.integration.backendintegrationproject.model.dto.Patient.PatientDto;
 import com.integration.backendintegrationproject.model.dto.Patient.PatientPostDto;
 import com.integration.backendintegrationproject.model.dto.Patient.PatientUpdateDto;
+import com.integration.backendintegrationproject.model.entities.Patient;
 import com.integration.backendintegrationproject.repository.PatientRepository;
 import com.integration.backendintegrationproject.service.PatientService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,7 @@ public class PatienceServiceImplementation implements PatientService {
     private final PatientRepository repository;
     private final PatientMapper mapper;
 
-    public PatienceServiceImplementation(PatientRepository repository, PatientMapper mapper) {
+    public PatienceServiceImplementation(PatientRepository repository,PatientMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
@@ -31,26 +33,26 @@ public class PatienceServiceImplementation implements PatientService {
                 .toList();
     }
 
-//        @Override
-//    public PatientDto createPatient(PatientPostDto patientPostDto) {
-//        var saved = repository.save( new Patient(
-//                patientPostDto.name(),
-//                patientPostDto.surname(),
-//                patientPostDto.address(),
-//                patientPostDto.DNI(),
-//                patientPostDto.appointmentDate()));
-//        return new PatientDto(
-//                saved.getName(),
-//                saved.getSurname(),
-//                saved.getAddress(),
-//                saved.getDNI(),
-//                saved.getAppointmentDate());
-//    }
-    @Override
+        @Override
     public PatientDto createPatient(PatientPostDto patientPostDto) {
-        var saved = repository.save(mapper.patientPostDto(patientPostDto));
-        return mapper.PatientPostDto(saved);
+        var saved = repository.save( new Patient(
+                patientPostDto.name(),
+                patientPostDto.surname(),
+                patientPostDto.address(),
+                patientPostDto.DNI(),
+                patientPostDto.appointmentDate()));
+        return new PatientDto(
+                saved.getName(),
+                saved.getSurname(),
+                saved.getAddress(),
+                saved.getDNI(),
+                saved.getAppointmentDate());
     }
+//    @Override
+//    public PatientDto createPatient(PatientPostDto patientPostDto) {
+//        var saved = repository.save(mapper.patientPostDto(patientPostDto));
+//        return mapper.PatientPostDto(saved);
+//    }
 
     @Override
     public PatientDto updatePatientInformation(PatientUpdateDto patientUpdateDto, Long id) throws ResourceNotFoundException {

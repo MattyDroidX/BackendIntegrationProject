@@ -22,13 +22,14 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .requestMatchers("/api/","/swagger-ui/index.html").hasRole("USER")
-//                .requestMatchers("/api/{id}").hasRole("ADMIN")
+                .requestMatchers("/api/").hasRole("USER")
+                .requestMatchers("/swagger-ui/index.html").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .and()
                 .httpBasic();
+        http.csrf().disable();
         return http.build();
     }
 
