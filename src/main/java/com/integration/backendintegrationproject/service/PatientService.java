@@ -7,12 +7,14 @@ import com.integration.backendintegrationproject.model.dto.Patient.PatientUpdate
 
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PatientService {
 
     List<PatientDto> findAll();
-    PatientDto createPatient(PatientPostDto patientPostDto);
-    PatientDto updatePatientInformation(PatientUpdateDto patientUpdateDto, Long id)throws ResourceNotFoundException;
+    PatientDto getPatientById(Long id ) throws ResourceNotFoundException;
+    Optional<PatientDto> createPatient(PatientPostDto patientPostDto);
+    Optional<PatientDto> updatePatientInformation(PatientUpdateDto patientUpdateDto, Long id)throws ResourceNotFoundException;
     void deletePatient(Long id) throws ResourceNotFoundException;
 
 }

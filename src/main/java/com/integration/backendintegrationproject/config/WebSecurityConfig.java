@@ -21,7 +21,7 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.authorizeHttpRequests()
                 .requestMatchers("/api/").hasRole("USER")
                 .requestMatchers("/swagger-ui/index.html").hasRole("ADMIN")
                 .anyRequest().authenticated()

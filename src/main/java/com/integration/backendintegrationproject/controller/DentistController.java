@@ -6,13 +6,12 @@ import com.integration.backendintegrationproject.model.dto.Dentist.DentistPostDt
 import com.integration.backendintegrationproject.model.dto.Dentist.DentistUpdateDto;
 import com.integration.backendintegrationproject.service.DentistService;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -29,13 +28,18 @@ public class DentistController{
     public List<DentistDto> findAll(){
         return service.findAll();
     }
+
+    @GetMapping( value = "/{id}")
+    public DentistDto getDentistById(@PathVariable Long id){
+        return service.getDentistById(id);
+    }
     @PostMapping
-    public DentistDto createDentist(@Valid @RequestBody DentistPostDto dentistPostDto) {
+    public Optional<DentistDto> createDentist(@Valid @RequestBody DentistPostDto dentistPostDto) {
         return service.createDentist(dentistPostDto);
     }
 
     @PatchMapping("/{id}")
-    public DentistDto updateDentistInformation(@RequestBody DentistUpdateDto dentist, @PathVariable Long id) throws ResourceNotFoundException {
+    public Optional<DentistDto> updateDentistInformation(@RequestBody DentistUpdateDto dentist, @PathVariable Long id) throws ResourceNotFoundException {
         return service.updateDentistInformation(dentist,id);
     }
 

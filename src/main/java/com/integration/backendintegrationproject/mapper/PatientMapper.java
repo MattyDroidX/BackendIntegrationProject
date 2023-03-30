@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 public interface PatientMapper {
     PatientDto patientDto(Patient patient );
 
-    PatientDto PatientPostDto(Patient patient);
-    Patient patientPostDto(PatientPostDto patient );
+    PatientDto patientPostDtoToPatient(Patient patient);
+    Patient patientToPostDto(PatientPostDto patient );
 
     @BeanMapping( nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE )
     void patientNewUpdate(PatientUpdateDto patientUpdateDto, @MappingTarget Patient patient );

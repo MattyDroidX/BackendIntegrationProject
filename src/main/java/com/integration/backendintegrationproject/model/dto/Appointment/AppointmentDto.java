@@ -1,6 +1,7 @@
-package com.integration.backendintegrationproject.model.dto;
+package com.integration.backendintegrationproject.model.dto.Appointment;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.Hidden;
+import com.integration.backendintegrationproject.model.entities.Dentist;
+import com.integration.backendintegrationproject.model.entities.Patient;
 
 import java.time.LocalDateTime;
 public record AppointmentDto(
@@ -10,7 +11,7 @@ public record AppointmentDto(
         @JsonProperty ("patient_id")
         Long patient_id,
 
-        @JsonProperty ("lastName")
+        @JsonProperty ("appointment")
         LocalDateTime registrationDate){
 
 }

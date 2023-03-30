@@ -13,5 +13,11 @@ public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException( String message ) {
         super( message );
     }
+
+    public class InvalidRequestException extends RuntimeException {
+        public InvalidRequestException(String message) {
+            super(message);
+        }
+    }
 }
 
