@@ -7,12 +7,14 @@ import com.integration.backendintegrationproject.model.dto.Dentist.DentistUpdate
 import com.integration.backendintegrationproject.service.DentistService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
+@CrossOrigin
 @Slf4j
 @RestController
 @RequestMapping("/api/dentist")
@@ -25,8 +27,11 @@ public class DentistController{
     }
 
     @GetMapping
-    public List<DentistDto> findAll(){
-        return service.findAll();
+    public ResponseEntity<List<DentistDto>> findAll(){
+        var records = service.findAll();
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("X-Total-Count", String.valueOf(records.size()));
+        return new ResponseEntity(records,responseHeaders, HttpStatus.OK);
     }
 
     @GetMapping( value = "/{id}")
