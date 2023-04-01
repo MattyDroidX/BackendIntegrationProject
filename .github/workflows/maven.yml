@@ -9,8 +9,6 @@
 name: Java Spring CI
 
 on:
-  release:
-    types: [ published ]
   workflow_dispatch:
     inputs:
       ECR_REPO:
@@ -19,7 +17,7 @@ on:
         type: string
         BRANCH:
           description: 'Branch to use'
-          default: 'main'
+          default: 'newModel'
 
 
 jobs:
@@ -37,14 +35,19 @@ jobs:
           distribution: 'corretto'
           cache: maven
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
-
+        run: |
+          mvn -B package --file pom.xml
+          curl -u $SPRING_SECURITY_USERNAME:$SPRING_SECURITY_PASSWORD http://your-spring-security-app.com/login -c cookie.txt -s -o /dev/null -w "%{http_code}"
+          curl -b cookie.txt http://your-spring-security-app.com/protected-resourc
       # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
       - name: Update dependency graph
         uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
 
   deploy-dev:
     runs-on: ubuntu-latest
+    env:
+      SPRING_SECURITY_USERNAME: ${{ secrets.SPRING_SECURITY_USERNAME }}
+      SPRING_SECURITY_PASSWORD: ${{ secrets.SPRING_SECURITY_PASSWORD }}
     environment:
       name: dev
     needs: build
