@@ -19,12 +19,7 @@ on:
         type: string
         BRANCH:
           description: 'Branch to use'
-          required: true
           default: 'main'
-          type: choice
-          options:
-            - main
-            - newModel
 
 
 jobs:
@@ -42,9 +37,7 @@ jobs:
           distribution: 'corretto'
           cache: maven
       - name: Build with Maven
-        run: |
-          ./authenticate.sh $SPRING_SECURITY_USERNAME $SPRING_SECURITY_PASSWORD
-          mvn -B package --file pom.xml
+        run: mvn -B package --file pom.xml
 
       # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
       - name: Update dependency graph
