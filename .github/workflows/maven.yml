@@ -9,15 +9,16 @@
 name: Java Spring CI
 
 on:
+  push:
+    branches:
+      - main
+      - newModel
   workflow_dispatch:
     inputs:
-      ECR_REPO:
-        description: 'Java Spring CI'
-        required: false
+      environment:
         type: string
-        BRANCH:
-          description: 'Branch to use'
-          default: 'newModel'
+        default: main
+        required: false
 
 
 jobs:
