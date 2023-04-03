@@ -13,7 +13,7 @@ on:
     inputs:
       ECR_REPO:
         description: 'Java Spring CI'
-        required: true
+        required: false
         type: string
         BRANCH:
           description: 'Branch to use'
