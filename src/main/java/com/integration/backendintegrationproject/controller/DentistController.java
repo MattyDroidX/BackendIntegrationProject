@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:5173")
 @Slf4j
 @RestController
 @RequestMapping("/api/dentist")
@@ -30,7 +30,7 @@ public class DentistController{
     public ResponseEntity<List<DentistDto>> findAll(){
         var records = service.findAll();
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("X-Total-Count", String.valueOf(records.size()));
+        responseHeaders.add("X-Total-Count", Integer.toString(records.size()));
         return new ResponseEntity(records,responseHeaders, HttpStatus.OK);
     }
 

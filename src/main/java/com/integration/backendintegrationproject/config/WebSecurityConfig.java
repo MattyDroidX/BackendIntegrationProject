@@ -13,7 +13,7 @@
 //import org.springframework.web.cors.CorsConfigurationSource;
 //import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 //
-//import java.util.List;
+//import java.util.Collections;
 //
 //@Configuration
 //@EnableWebSecurity
@@ -53,15 +53,20 @@
 //    }
 //
 //    @Bean
-//    CorsConfigurationSource corsConfigurationSource(){
+//    public CorsConfigurationSource corsConfigurationSource(){
 //        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.setAllowedOrigins(List.of("http://localhost:5173",""));
-//        configuration.setAllowedOriginPatterns(List.of("http://localhost:5173"));
-//        configuration.setAllowedMethods(List.of("GET","POST","OPTIONS","DELETE","PUT","PATCH"));
-//        configuration.setAllowedHeaders(List.of("Access-Control-Allow-Origin","X-Requested-With",""));
-//        configuration.setAllowCredentials(true);
+//        configuration.setAllowedOrigins(Collections.singletonList("*"));
+//        configuration.setAllowedMethods(Collections.singletonList("*"));
+//        configuration.setAllowedHeaders(Collections.singletonList("*"));
 //        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 //        source.registerCorsConfiguration("/**", configuration);
 //        return source;
 //    }
+//
+////    @Bean
+////    public WebMvcConfigurer corsConfigurer(){
+////        return (WebMVCConfigurerAdapter) addCorsMappings(registry) -> {
+////            registry
+////        }
+////    }
 //}
