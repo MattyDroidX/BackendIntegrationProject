@@ -67,3 +67,10 @@ jobs:
           tags: |
             mattydroidx/backend-integration-project:${{ github.sha }}
             mattydroidx/backend-integration-project:latest
+
+      - name: DEPLOY ON FIREBASE
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
+        env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
