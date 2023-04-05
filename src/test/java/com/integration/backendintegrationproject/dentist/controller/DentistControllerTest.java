@@ -5,17 +5,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
+import org.springframework.security.test.context.support.WithAnonymousUser;
+import org.springframework.security.test.context.support.WithMockUser;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@WithMockUser("spring")
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+properties = {"spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration"})
 
 class DentistControllerTest {
     private TestRestTemplate testRestTemplate;
@@ -26,7 +31,7 @@ class DentistControllerTest {
 
     @BeforeEach
     void setup(){
-        restTemplateBuilder = restTemplateBuilder.rootUri("http://localhost:" + port);
+        restTemplateBuilder = restTemplateBuilder.rootUri("http://localhost:" + port).basicAuthentication("admin","password");
         testRestTemplate = new TestRestTemplate(restTemplateBuilder);
     }
 

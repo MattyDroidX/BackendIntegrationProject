@@ -68,7 +68,7 @@ jobs:
             mattydroidx/backend-integration-project:${{ github.sha }}
             mattydroidx/backend-integration-project:latest
 
-      - name: DEPLOY ON FIREBASE
+      - name: Deploy on Firebase
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
