@@ -16,7 +16,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-
 class PatientControllerTest {
     private TestRestTemplate testRestTemplate;
     @Autowired
@@ -26,7 +25,7 @@ class PatientControllerTest {
 
     @BeforeEach
     void setup(){
-        restTemplateBuilder = restTemplateBuilder.rootUri("http://localhost:" + port);
+        restTemplateBuilder = restTemplateBuilder.rootUri("http://localhost:" + port).basicAuthentication("admin","password");
         testRestTemplate = new TestRestTemplate(restTemplateBuilder);
     }
 
@@ -54,7 +53,6 @@ class PatientControllerTest {
                 {
                   "name": "Cosme",
                   "surname": "Fulanito"
-                  "address": "Cordoba"
                 }
                 """;
 
@@ -64,5 +62,7 @@ class PatientControllerTest {
         Patient result = response.getBody();
 
         assert result != null;
+        assertEquals("Fulanito", result.getSurname());
+        assertEquals("Cosme", result.getName());
     }
 }
