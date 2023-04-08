@@ -11,13 +11,13 @@ name: Java Spring CI
 on:
   push:
     branches:
-      - main
+      - master
       - newModel
   workflow_dispatch:
     inputs:
       environment:
         type: string
-        default: main
+        default: master
         required: false
 
 
