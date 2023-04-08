@@ -22,7 +22,7 @@ on:
 
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: dev
-    needs: build
+    needs: test
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -74,3 +74,23 @@ jobs:
           args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
+  deploy-prd:
+    runs-on: ubuntu-latest
+    environment:
+      name: Deploy to EC2
+    needs: deploy-dev
+    steps:
+      - name: Checkout the files
+        uses: actions/checkout@v3
+
+      - name: Copy files with SSH
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "./"
+          REMOTE_HOST: ${{ secrets.REMOTE_AWS_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_AWS_USER }}
+          TARGET: ${{ secrets.TARGET_DIR }}
+          EXCLUDE: "/dist/, /node_module/, **.env, rebuild_app.sh, watcher.sh"
