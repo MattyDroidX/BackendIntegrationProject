@@ -74,8 +74,29 @@ Class 48 delivery. You will have time throughout the day to deliver until 11:59 
 Once you clone the repository you can check the endpoints on this website:
 
 ```
-  localhost:8080/swagger-ui/index.html
-  
+  localhost:8085/swagger-ui/index.html
+```
+To check other endpoints instead you will have to add credentials as:
+
+```
+    username: "admin"
+    password: "password"
+```
+You can also check the docker registry with all the related versions:
+
+```
+    https://hub.docker.com/repository/docker/mattydroidx/backend-integration-project/general
 ```
 
+You can run the docker command with the following steps:
+
+```
+    docker run -p 8085:8085 mattydroidx/backend-integration-project:latest
+```
+
+For the latest version.
+
+For further information you can reach me at fernando.matias.duarte@gmail.com
+
 Thanks for sharing!
+Happy coding.
