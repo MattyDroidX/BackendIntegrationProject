@@ -88,9 +88,7 @@ jobs:
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          ARGS: "-rltgoDzvO --delete"
           SOURCE: "./"
           REMOTE_HOST: ${{ secrets.REMOTE_AWS_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_AWS_USER }}
           TARGET: "/home/ec2-user"
-          EXCLUDE: "/.firebase/, /.idea/, **.env, .mvn"
