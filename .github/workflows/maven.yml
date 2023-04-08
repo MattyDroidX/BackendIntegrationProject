@@ -92,5 +92,5 @@ jobs:
           SOURCE: "./"
           REMOTE_HOST: ${{ secrets.REMOTE_AWS_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_AWS_USER }}
-          TARGET: ${{ secrets.TARGET_DIR }}
-          EXCLUDE: "/dist/, /node_module/, **.env, rebuild_app.sh, watcher.sh"
+          TARGET: "/home/ec2-user"
+          EXCLUDE: "/.firebase/, /.idea/, **.env, .mvn"
