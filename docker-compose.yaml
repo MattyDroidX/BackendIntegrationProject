@@ -1,18 +1,19 @@
-version: "3"
+version: '3.8'
 services:
-  spring:
-    image: backend-integration-project
+  dental-clinic:
+    container_name: backend-integration-project
     build: .
+    restart: always
     ports:
-      - "8085:8085"
+      - "8080:8080"
     depends_on:
-      - postgresqldb
-
-  postgresqldb:
-    image: postgres
-    ports:
-      - "5432:5432"
+      - mysql-server
+  mysql-server:
+    container_name: mysql
+    image: mysql:8.0.32
+    restart: always
     environment:
-      - POSTGRES_PASSWORD=admin
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=springpostgres
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=dental-clinic
+    ports:
+      - "3307:3306"

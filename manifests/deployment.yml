@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-integration-project
+  labels:
+    app: backend-integration-project
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend-integration-project
+  template:
+    metadata:
+      labels:
+        app: backend-integration-project
+    spec:
+      containers:
+        - name: backend-integration-project
+          image: abhishekf5/ultimate-cicd:replaceImageTag
+          ports:
+            - containerPort: 8080

@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://mysql-server:3306/dental-clinic?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
